@@ -40,23 +40,16 @@ automatically be notified of progress on your bug as I make changes.
 
 # SUPPORT
 
-You can find documentation for this module with the perldoc command.
+You can find documentation for this module
+with the perldoc command.
 
     perldoc e
 
 You can also look for information at:
 
-- RT: CPAN's request tracker (report bugs here)
+[https://metacpan.org/pod/e](https://metacpan.org/pod/e)
 
-    [https://rt.cpan.org/NoAuth/Bugs.html?Dist=e](https://rt.cpan.org/NoAuth/Bugs.html?Dist=e)
-
-- CPAN Ratings
-
-    [https://cpanratings.perl.org/d/e](https://cpanratings.perl.org/d/e)
-
-- Search CPAN
-
-    [https://metacpan.org/release/e](https://metacpan.org/release/e)
+[https://github.com/poti1/e](https://github.com/poti1/e)
 
 # ACKNOWLEDGEMENTS
 

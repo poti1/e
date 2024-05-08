@@ -59,33 +59,18 @@ Please report any bugs or feature requests to C<bug-e at rt.cpan.org>, or throug
 the web interface at L<https://rt.cpan.org/NoAuth/ReportBug.html?Queue=e>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
 
-
-
-
 =head1 SUPPORT
 
-You can find documentation for this module with the perldoc command.
+You can find documentation for this module
+with the perldoc command.
 
     perldoc e
 
-
 You can also look for information at:
 
-=over 4
+L<https://metacpan.org/pod/e>
 
-=item * RT: CPAN's request tracker (report bugs here)
-
-L<https://rt.cpan.org/NoAuth/Bugs.html?Dist=e>
-
-=item * CPAN Ratings
-
-L<https://cpanratings.perl.org/d/e>
-
-=item * Search CPAN
-
-L<https://metacpan.org/release/e>
-
-=back
+L<https://github.com/poti1/e>
 
 
 =head1 ACKNOWLEDGEMENTS
