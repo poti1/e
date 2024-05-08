@@ -1,0 +1,16 @@
+Makefile
+Makefile
+Build
+MYMETA.*
+META.*
+.build/
+_build/
+blib/
+build_dir/
+nytprof.out
+pod2htm*.tmp
+pm_to_blib
+Runtime-Debugger-*
+Runtime-Debugger-*.tar.gz
+*.swp
+*.bak

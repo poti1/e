@@ -1,0 +1,128 @@
+---
+name: build and test
+
+on:
+  push:
+    branches:
+      - "main2"
+  pull_request:
+    branches:
+      - "main2"
+  workflow_dispatch:
+
+jobs:
+  build-job:
+    name: Build distribution
+    runs-on: ubuntu-20.04
+    container:
+      image: perldocker/perl-tester:5.38
+    steps:
+
+      - name: Checkout docker/package
+        uses: actions/checkout@v4
+
+      - name: Show perl version
+        run: perl -V
+
+      - name: Install dependencies
+        run: |
+          apt install -y libreadline-dev
+          cpanm Module::Build~0.4004
+          cpanm Test::CheckManifest
+          perl Build.PL
+          perl Build installdeps
+
+      - name: Prepare build_dir
+        run: |
+          perl Build distdir
+          BUILD_DIR=$(perl -MModule::Build -e 'print Module::Build->resume->dist_dir')
+          mv -v $BUILD_DIR build_dir
+
+      - name: Run tests (sanity check)
+        env:
+          AUTHOR_TESTING: 1
+          AUTOMATED_TESTING: 1
+          EXTENDED_TESTING: 1
+          RELEASE_TESTING: 1
+        run: |
+          cd build_dir
+          perl Build.PL
+          perl Build test
+
+      - name: Upload artifact for next steps
+        uses: actions/upload-artifact@v4
+        with:
+          name: build_dir
+          path: build_dir
+
+  coverage-job:
+    needs: build-job
+    runs-on: ubuntu-20.04
+    container:
+      image: perldocker/perl-tester:5.38
+    steps:
+
+      - name: Checkout docker/package
+        uses: actions/checkout@v4 # codecov wants to be inside a Git repository
+
+      - name: Download artifact from build step
+        uses: actions/download-artifact@v4
+        with:
+          name: build_dir
+          path: .
+
+      - name: Install deps and test
+        run: cpan-install-dist-deps && test-dist
+        env:
+          CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
+
+  test-job:
+    needs: build-job
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ ubuntu-latest, macos-latest ]
+        distribution: [ default ]
+        perl-version:
+          - "5.18"
+          - "5.20"
+          - "5.22"
+          - "5.24"
+          - "5.26"
+          - "5.28"
+          - "5.30"
+          - "5.32"
+          - "5.34"
+          - "5.36"
+          - "5.38"
+          - "latest"
+    runs-on: ${{ matrix.os }}
+    name:  on ${{ matrix.os }} perl ${{ matrix.perl-version }}
+    steps:
+
+      - name: Set up perl
+        uses: shogo82148/actions-setup-perl@v1.28.0
+        with:
+          perl-version: ${{ matrix.perl-version }}
+          distribution: ${{ matrix.distribution }}
+
+      - name: Download artifact from build step
+        uses: actions/download-artifact@v4
+        with:
+          name: build_dir
+          path: .
+
+      - name: Show perl version
+        run: perl -V
+
+      - name: Install Dependencies
+        run: |
+          cpanm Module::Build~0.4004
+          perl Build.PL
+          perl Build installdeps
+
+      - name: Run tests
+        run: prove -lr t -v
+        env:
+          AUTHOR_TESTING: 0
+          RELEASE_TESTING: 0
