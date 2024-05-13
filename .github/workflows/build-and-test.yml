@@ -26,8 +26,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cpanm Module::Build~0.4004
-          cpanm Test::CheckManifest
+          cpanm --notest Module::Build~0.4004
+          cpanm --notest Test::CheckManifest
           perl Build.PL
           perl Build installdeps
 
@@ -119,7 +119,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          cpanm Module::Build~0.4004
+          cpanm --notest Module::Build~0.4004
           perl Build.PL
           perl Build installdeps
 
