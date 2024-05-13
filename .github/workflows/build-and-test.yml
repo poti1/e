@@ -78,7 +78,7 @@ jobs:
   test-job:
     needs: build-job
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         os: [ ubuntu-latest, macos-latest ]
         distribution: [ default ]
