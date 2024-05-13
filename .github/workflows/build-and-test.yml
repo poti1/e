@@ -78,13 +78,11 @@ jobs:
   test-job:
     needs: build-job
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         os: [ ubuntu-latest, macos-latest ]
         distribution: [ default ]
         perl-version:
-          - "5.12"
-          - "5.14"
           - "5.16"
           - "5.18"
           - "5.20"

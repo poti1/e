@@ -30,7 +30,7 @@ my $builder = $class->new(
         'Test::More' => '0',
     },
     requires => {
-        'perl'              => '5.012',
+        'perl'              => '5.016',
         'Sub::Util'         => '0',
         'Runtime::Debugger' => '0.19',
         'Data::Trace'       => '0.19',
