@@ -4,10 +4,10 @@ name: build and test
 on:
   push:
     branches:
-      - "main2"
+      - "main"
   pull_request:
     branches:
-      - "main2"
+      - "main"
   workflow_dispatch:
 
 jobs:
@@ -26,7 +26,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          apt install -y libreadline-dev
           cpanm Module::Build~0.4004
           cpanm Test::CheckManifest
           perl Build.PL
@@ -84,6 +83,9 @@ jobs:
         os: [ ubuntu-latest, macos-latest ]
         distribution: [ default ]
         perl-version:
+          - "5.12"
+          - "5.14"
+          - "5.16"
           - "5.18"
           - "5.20"
           - "5.22"

@@ -10,7 +10,7 @@ build_dir/
 nytprof.out
 pod2htm*.tmp
 pm_to_blib
-Runtime-Debugger-*
-Runtime-Debugger-*.tar.gz
+e-*
+e-*.tar.gz
 *.swp
 *.bak
