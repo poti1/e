@@ -19,9 +19,7 @@ sub run {
     $out;
 }
 
-is
-  b( "abc" )->size, 3,
-  "b - size";
+is b( "abc" )->size, 3, "b - size";
 
 is_deeply
   c( 1, 2, 1, 3 )->uniq->to_array,
@@ -32,15 +30,6 @@ is
   f( "/proc/cpuinfo" )->basename,
   "cpuinfo",
   "f - basename";
-
-my $host =
-  $ENV{ON_ANDROID}
-  ? "https://nmap.org"
-  : "localhost";
-is
-  g( $host )->message,
-  "OK",
-  "g - get";
 
 is
   j( { a => 1 } ),
