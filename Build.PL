@@ -32,14 +32,14 @@ my $builder = $class->new(
     requires => {
         'perl'              => '5.016',
         'Sub::Util'         => '0',
-        'Runtime::Debugger' => '0.20',
-        'Data::Trace'       => '0.19',
+        'Runtime::Debugger' => '1.01',
+        'Data::Trace'       => '1.01',
         'Tiny::Prof'        => '0',
         'Mojolicious'       => '0',
         'YAML::XS'          => '0',
         'Data::Printer'     => '0',
     },
-    add_to_cleanup => [ 'e-*', 'MANIFEST*.bak', 'README*', 'blib/', ],
+    add_to_cleanup => [ 'e-*', 'MANIFEST*.bak', 'README*', 'blib/' ],
     meta_merge     => {
         resources => {
             bugtracker => 'https://github.com/poti1/e/issues',

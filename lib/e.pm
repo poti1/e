@@ -20,7 +20,7 @@ e - Unleash the power of e!
 
 =cut
 
-our $VERSION = '1.05';
+our $VERSION = '1.06';
 
 =head1 SYNOPSIS
 
@@ -80,15 +80,27 @@ Invoke the Tiny::Prof:
 
     perl -Me -e 'prof'
 
+=head1 DESCRIPTION
+
+This module imports many features that make
+one-liners and script debugging much faster.
+
+For performance, a simple 'use e' statement
+will import nearly no other libraries thereby
+making its startup impact quite low.
+
+=cut
+
 =head1 SUBROUTINES
 
 =head2 monkey_patch
 
-insert subroutines into the symbol table.
+Insert subroutines into the symbol table.
 
 Extracted from Mojo::Util for performance.
 
-Can be updated once this issue is resolved:
+Perhaps can be updated based on the outcome
+of this issue:
 L<https://github.com/mojolicious/mojo/pull/2173>
 
 =cut
@@ -96,7 +108,10 @@ L<https://github.com/mojolicious/mojo/pull/2173>
 sub monkey_patch {
     my ( $class, %patch ) = @_;
 
-    require Sub::Util;    # Can omit set_subname, but it makes traces nicer.
+    # Can be omitted, but it makes traces much
+    # nicer since it adds names to subs.
+    require Sub::Util;
+
     no strict 'refs';
 
     for ( keys %patch ) {
@@ -107,7 +122,8 @@ sub monkey_patch {
 
 =head2 import
 
-Inserts commands into caller's namespace.
+These keys will become sub names in the
+caller's namespace.
 
 =cut
 
@@ -121,9 +137,8 @@ sub import {
 
         # Debugging.
         repl => sub {
+
             require Runtime::Debugger;
-            Runtime::Debugger->VERSION( '0.20' )
-              ;    # Since not using "use MODULE VERSION".
             Runtime::Debugger::repl(
                 levels_up => 1,
                 @_,
@@ -131,18 +146,14 @@ sub import {
         },
 
         # Tracing.
-        trace => sub {    # Stack or var trace.
+        trace => sub {
             require Data::Trace;
-            Data::Trace->VERSION( '0.19' )
-              ;           # Since not using "use MODULE VERSION".
             Data::Trace::Trace( @_ );
         },
 
         # Alias for trace.
-        watch => sub {    # Stack or var trace.
+        watch => sub {
             require Data::Trace;
-            Data::Trace->VERSION( '0.19' )
-              ;           # Since not using "use MODULE VERSION".
             Data::Trace::Trace( @_ );
         },
 

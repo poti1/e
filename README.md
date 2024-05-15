@@ -68,20 +68,31 @@ Invoke the Tiny::Prof:
 
     perl -Me -e 'prof'
 
+# DESCRIPTION
+
+This module imports many features that make
+one-liners and script debugging much faster.
+
+For performance, a simple 'use e' statement
+will import nearly no other libraries thereby
+making its startup impact quite low.
+
 # SUBROUTINES
 
 ## monkey\_patch
 
-insert subroutines into the symbol table.
+Insert subroutines into the symbol table.
 
 Extracted from Mojo::Util for performance.
 
-Can be updated once this issue is resolved:
+Perhaps can be updated based on the outcome
+of this issue:
 [https://github.com/mojolicious/mojo/pull/2173](https://github.com/mojolicious/mojo/pull/2173)
 
 ## import
 
-Inserts commands into caller's namespace.
+These keys will become sub names in the
+caller's namespace.
 
 # AUTHOR
 
