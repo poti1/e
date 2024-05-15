@@ -22,7 +22,8 @@ my $class = Module::Build->subclass(
                 "-q",
                 "head1=LOGO/Verbatim",
             );
-            use App::Pod;
+            require App::Pod;
+            App::Pod->import;
             App::Pod->run;
         }
     },
