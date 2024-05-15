@@ -13,6 +13,18 @@ my $class = Module::Build->subclass(
             print "Building README\n";
             system "pod2markdown lib/e.pm > README.md";
         }
+        sub ACTION_install {
+            my ($s) = @_;
+            $s->SUPER::ACTION_install;
+
+            local @ARGV = (
+                "e",
+                "-q",
+                "head1=LOGO/Verbatim",
+            );
+            use App::Pod;
+            App::Pod->run;
+        }
     },
 );
 $class->ACTION_readme();
@@ -38,6 +50,7 @@ my $builder = $class->new(
         'Mojolicious'       => '0',
         'YAML::XS'          => '0',
         'Data::Printer'     => '0',
+        'App::Pod'          => '0.36',
     },
     add_to_cleanup => [ 'e-*', 'MANIFEST*.bak', 'README*', 'blib/' ],
     meta_merge     => {

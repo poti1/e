@@ -1,36 +1,33 @@
 # LOGO
 
-                   __                __             __
-      __  ______  / /__  ____ ______/ /_  ___  ____/ /
-     / / / / __ \/ / _ \/ __ `/ ___/ __ \/ _ \/ __  /
-    / /_/ / / / / /  __/ /_/ (__  ) / / /  __/ /_/ /
-    \__,_/_/ /_/_/\___/\__,_/____/_/ /_/\___/\__,_/
+                     ___====-_  _-====___
+               _--~~~#####// '  ` \\#####~~~--_
+             -~##########// (    ) \\##########~-_
+           -############//  |\^^/|  \\############-
+         _~############//   (O||O)   \\############~_
+        ~#############((     \\//     ))#############~
+       -###############\\    (oo)    //###############-
+      -#################\\  / `' \  //#################-
+     -###################\\/  ()  \//###################-
+    _#/|##########/\######(  (())  )######/\##########|\#_
+    |/ |#/\#/\#/\/  \#/\##|  \()/  |##/\#/  \/\#/\#/\#| \|
+    `  |/  V  V  `   V  )||  |()|  ||(  V   '  V /\  \|  '
+       `   `  `      `  / |  |()|  | \  '      '<||>  '
+                       (  |  |()|  |  )\        /|/
+                      __\ |__|()|__| /__\______/|/
+                     (vvv(vvvv)(vvvv)vvv)______|/
+                     __                __             __
+        __  ______  / /__  ____ ______/ /_  ___  ____/ /
+       / / / / __ \/ / _ \/ __ `/ ___/ __ \/ _ \/ __  /
+      / /_/ / / / / /  __/ /_/ (__  ) / / /  __/ /_/ /
+      \__,_/_/ /_/_/\___/\__,_/____/_/ /_/\___/\__,_/
+     
 
 # NAME
 
-e - Unleash the power of e!
+e - beastmode unleashed
 
 # SYNOPSIS
-
-Convert a data structure to json:
-
-    perl -Me -e 'say j { a => [ 1..3] }'
-
-Convert a data structure to yaml:
-
-    perl -Me -e 'say yml { a => [ 1..3] }'
-
-Pretty print a data structure:
-
-    perl -Me -e 'p { a => [ 1..3] }'
-
-Data dump a data structure:
-
-    perl -Me -e 'd { a => [ 1..3] }'
-
-Devel::Peek dump a data structure:
-
-    perl -Me -e 'dd { a => [ 1..3] }'
 
 Add a trace marker:
 
@@ -68,14 +65,34 @@ Invoke the Tiny::Prof:
 
     perl -Me -e 'prof'
 
+Convert a data structure to json:
+
+    perl -Me -e 'say j { a => [ 1..3] }'
+
+Convert a data structure to yaml:
+
+    perl -Me -e 'say yml { a => [ 1..3] }'
+
+Pretty print a data structure:
+
+    perl -Me -e 'p { a => [ 1..3] }'
+
+Data dump a data structure:
+
+    perl -Me -e 'd { a => [ 1..3] }'
+
+Devel::Peek dump a data structure:
+
+    perl -Me -e 'dd { a => [ 1..3] }'
+
 # DESCRIPTION
 
 This module imports many features that make
 one-liners and script debugging much faster.
 
-For performance, a simple 'use e' statement
-will import nearly no other libraries thereby
-making its startup impact quite low.
+It has been optimized for performance to not
+import all features right away:
+thereby making its startup cost quite low.
 
 # SUBROUTINES
 
@@ -91,7 +108,7 @@ of this issue:
 
 ## import
 
-These keys will become sub names in the
+These keys will become function inside of the
 caller's namespace.
 
 # AUTHOR
