@@ -36,7 +36,7 @@ e - beastmode unleashed
 
 =cut
 
-our $VERSION = '1.07';
+our $VERSION = '1.08';
 
 =head1 SYNOPSIS
 
@@ -295,6 +295,18 @@ sub import {
         l => sub {
             require Mojo::URL;
             Mojo::URL->new( @_ );
+        },
+
+        ######################################
+        #              Pod
+        ######################################
+
+        pod => sub {
+            require App::Pod;
+            App::Pod->import;
+
+            local @ARGV = @_;
+            App::Pod->run;
         },
 
         ######################################
