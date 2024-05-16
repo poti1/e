@@ -108,9 +108,6 @@ of this issue:
 
 ## import
 
-These keys will become function inside of the
-caller's namespace.
-
 ## repl
 
 Add a breakpoint to code.

@@ -121,9 +121,6 @@ L<https://github.com/mojolicious/mojo/pull/2173>
 
 =head2 import
 
-These keys will become function inside of the
-caller's namespace.
-
 =head2 repl
 
 Add a breakpoint to code.
