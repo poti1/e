@@ -34,7 +34,7 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = '1.13';
+our $VERSION = '1.14';
 
 =head1 SYNOPSIS
 
@@ -192,6 +192,12 @@ Data dumper.
 =head2 dd
 
 Internal data dumper.
+
+=head2 dye
+
+Color a string.
+
+    say dye( "HEY", "RED" );
 
 =head2 g
 
@@ -366,6 +372,12 @@ sub import {
         dd => sub {
             require Devel::Peek;
             Devel::Peek::Dump( @_ );
+        },
+
+        # Color.
+        dye => sub {
+            require Term::ANSIColor;
+            Term::ANSIColor::colored( @_ );
         },
 
         ######################################
