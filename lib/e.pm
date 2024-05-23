@@ -34,7 +34,7 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = '1.11';
+our $VERSION = '1.12';
 
 =head1 SYNOPSIS
 
@@ -232,7 +232,6 @@ sub import {
 
         # Debugging.
         repl => sub {
-
             require Runtime::Debugger;
             Runtime::Debugger::repl(
                 levels_up => 1,
@@ -336,12 +335,22 @@ sub import {
         # Pretty Print.
         p => sub {
             require Data::Printer;
-            Data::Printer->import( use_prototypes => 0 );
+            Data::Printer->import(
+                use_prototypes => 0,
+                show_dualvar   => "off",
+                hash_separator => " => ",
+                end_separator  => 1,
+            );
             p( @_ );
         },
         np => sub {
             require Data::Printer;
-            Data::Printer->import( use_prototypes => 0 );
+            Data::Printer->import(
+                use_prototypes => 0,
+                show_dualvar   => "off",
+                hash_separator => " => ",
+                end_separator  => 1,
+            );
             np( @_ );
         },
 
