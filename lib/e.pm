@@ -340,6 +340,8 @@ sub import {
                 show_dualvar   => "off",
                 hash_separator => " => ",
                 end_separator  => 1,
+                caller_info    => 1,
+                show_refcount  => 1,
             );
             p( @_ );
         },
@@ -350,6 +352,8 @@ sub import {
                 show_dualvar   => "off",
                 hash_separator => " => ",
                 end_separator  => 1,
+                caller_info    => 1,
+                show_refcount  => 1,
             );
             np( @_ );
         },
