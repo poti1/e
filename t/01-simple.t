@@ -119,30 +119,24 @@ is
 {
     my @lines    = ( [qw(key value)], [qw(red 111)], [qw(blue 222)] );
     my @expected = (
-            "+------+-------+",
-            "| key  | value |",
-            "+------+-------+",
-            "| red  | 111   |",
-            "| blue | 222   |",
-            "+------+-------+",
+        "+------+-------+", "| key  | value |",
+        "+------+-------+", "| red  | 111   |",
+        "| blue | 222   |", "+------+-------+",
     );
 
-    my @list  = table( @lines );
-    is_deeply
-        \@list,
-        \@expected,
-        "table - list context";
+    my @list = table( @lines );
+    is_deeply \@list, \@expected, "table - list context";
 
     my $scalar = table( @lines );
     is
-        $scalar,
-        join("\n", @expected),
-        "table - scalar context";
+      $scalar,
+      join( "\n", @expected ),
+      "table - scalar context";
 
     is
-        run( sub { table( @lines ) }),
-        join("", map {"$_\n"} @expected),
-        "table - void context";
+      run( sub { table( @lines ) } ),
+      join( "", map { "$_\n" } @expected ),
+      "table - void context";
 
 }
 

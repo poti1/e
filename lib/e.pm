@@ -491,7 +491,7 @@ sub import {
                 require Term::Table;
             }
 
-            my ($header,@rows) = @_;
+            my ( $header, @rows ) = @_;
             my @lines = Term::Table->new(
                 header => $header,
                 rows   => \@rows,
