@@ -48,7 +48,7 @@ my $builder = $class->new(
         'Tiny::Prof'        => '0.03',
         'YAML::XS'          => '0',
     },
-    add_to_cleanup => [ 'e-*', 'MANIFEST*.bak', 'blib/' ],
+    add_to_cleanup => [ 'e-*', 'MANIFEST*.bak', 'blib/', 'pod2htmd.tmp' ],
     meta_merge     => {
         resources => {
             bugtracker => 'https://github.com/poti1/e/issues',
