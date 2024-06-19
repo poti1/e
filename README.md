@@ -26,7 +26,7 @@
               ⠹⡽⣾⣿⠹⣿⣆⣾⢯⣿⣿ ⡞ ⠻⣿⣿⣿⠁ ⢠⣿⢏  ⡀ ⡟  ⢀⣴⣿⠃⢁⡼⠁ ⠈
                 ⠈⠛ ⢻⣿⣧⢸⢟⠶⢾⡇  ⣸⡿⠁ ⢠⣾⡟⢼  ⣷ ⡇ ⣰⠋⠙⠁
                    ⠈⣿⣻⣾⣦⣇⢸⣇⣀⣶⡿⠁⣀⣀⣾⢿⡇⢸  ⣟⡦⣧⣶⠏ unleashed
-                    ⠸⢿⡍⠛⠻⠿⠿⠿⠋⣠⡾⢋⣾⣏⣸⣷⡸⣇⢰⠟⠛⠻⡄  v1.20
+                    ⠸⢿⡍⠛⠻⠿⠿⠿⠋⣠⡾⢋⣾⣏⣸⣷⡸⣇⢰⠟⠛⠻⡄  v1.21
                       ⢻⡄   ⠐⠚⠋⣠⡾⣧⣿⠁⠙⢳⣽⡟
                       ⠈⠳⢦⣤⣤⣀⣤⡶⠛ ⠈⢿⡆  ⢿⡇
                             ⠈    ⠈⠓  ⠈
@@ -216,7 +216,7 @@ YAML parser.
 
 ## enc
 
-Encode to UTF-8:
+Encode UTF-8 code point to a byte stream:
 
     perl -C -Me -e 'printf "%#X\n", ord for enc("\x{5D0}") =~ /./g'
     0XD7
@@ -225,10 +225,14 @@ Encode to UTF-8:
 
 ## dec
 
-Decode from UTF-8:
+Decode a byte steam to UTF-8 code point:
 
     perl -C -Me -e 'say dec "\xD7\x90"'
     א
+
+## utf8
+
+Set STDOUT and STDERR as UTF-8 encoded.
 
 ## b
 

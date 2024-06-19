@@ -244,6 +244,10 @@ Decode a byte steam to UTF-8 code point:
     perl -C -Me -e 'say dec "\xD7\x90"'
     א
 
+=head2 utf8
+
+Set STDOUT and STDERR as UTF-8 encoded.
+
 =head2 b
 
 Work with strings.
@@ -391,7 +395,7 @@ sub import {
                 require Tiny::Prof;
             }
             Tiny::Prof->run(
-                Name => 'Test',
+                name => 'Test',
                 @_,
             );
         },
@@ -443,6 +447,12 @@ sub import {
             my ( $ubs ) = @_;
             Encode::decode( "UTF-8", $ubs,
                 Encode::WARN_ON_ERR() | Encode::LEAVE_SRC() );
+        },
+
+        # Set UTF-8 for STDOUT and STDERR.
+        utf8 => sub {
+            binmode *STDOUT, "encoding(UTF-8)";
+            binmode *STDERR, "encoding(UTF-8)";
         },
 
         ######################################
