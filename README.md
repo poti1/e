@@ -26,7 +26,7 @@
               ⠹⡽⣾⣿⠹⣿⣆⣾⢯⣿⣿ ⡞ ⠻⣿⣿⣿⠁ ⢠⣿⢏  ⡀ ⡟  ⢀⣴⣿⠃⢁⡼⠁ ⠈
                 ⠈⠛ ⢻⣿⣧⢸⢟⠶⢾⡇  ⣸⡿⠁ ⢠⣾⡟⢼  ⣷ ⡇ ⣰⠋⠙⠁
                    ⠈⣿⣻⣾⣦⣇⢸⣇⣀⣶⡿⠁⣀⣀⣾⢿⡇⢸  ⣟⡦⣧⣶⠏ unleashed
-                    ⠸⢿⡍⠛⠻⠿⠿⠿⠋⣠⡾⢋⣾⣏⣸⣷⡸⣇⢰⠟⠛⠻⡄  v1.19
+                    ⠸⢿⡍⠛⠻⠿⠿⠿⠋⣠⡾⢋⣾⣏⣸⣷⡸⣇⢰⠟⠛⠻⡄  v1.20
                       ⢻⡄   ⠐⠚⠋⣠⡾⣧⣿⠁⠙⢳⣽⡟
                       ⠈⠳⢦⣤⣤⣀⣤⡶⠛ ⠈⢿⡆  ⢿⡇
                             ⠈    ⠈⠓  ⠈
@@ -106,6 +106,16 @@ Print data as a table:
     | red  | 111   |
     | blue | 222   |
     +------+-------+
+
+Encode/decode UTF-8:
+
+    perl -C -Me -e 'printf "%#X\n", ord for enc("\x{5D0}") =~ /./g'
+    0XD7
+    0X90
+
+    perl -C -Me -e 'say dec "\xD7\x90"'
+    א
+    
 
 # DESCRIPTION
 
@@ -203,6 +213,22 @@ XML parser.
 ## yml
 
 YAML parser.
+
+## enc
+
+Encode to UTF-8:
+
+    perl -C -Me -e 'printf "%#X\n", ord for enc("\x{5D0}") =~ /./g'
+    0XD7
+    0X90
+    
+
+## dec
+
+Decode from UTF-8:
+
+    perl -C -Me -e 'say dec "\xD7\x90"'
+    א
 
 ## b
 

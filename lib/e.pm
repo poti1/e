@@ -30,7 +30,7 @@ package e;
            ⠹⡽⣾⣿⠹⣿⣆⣾⢯⣿⣿ ⡞ ⠻⣿⣿⣿⠁ ⢠⣿⢏  ⡀ ⡟  ⢀⣴⣿⠃⢁⡼⠁ ⠈
              ⠈⠛ ⢻⣿⣧⢸⢟⠶⢾⡇  ⣸⡿⠁ ⢠⣾⡟⢼  ⣷ ⡇ ⣰⠋⠙⠁
                 ⠈⣿⣻⣾⣦⣇⢸⣇⣀⣶⡿⠁⣀⣀⣾⢿⡇⢸  ⣟⡦⣧⣶⠏ unleashed
-                 ⠸⢿⡍⠛⠻⠿⠿⠿⠋⣠⡾⢋⣾⣏⣸⣷⡸⣇⢰⠟⠛⠻⡄  v1.19
+                 ⠸⢿⡍⠛⠻⠿⠿⠿⠋⣠⡾⢋⣾⣏⣸⣷⡸⣇⢰⠟⠛⠻⡄  v1.20
                    ⢻⡄   ⠐⠚⠋⣠⡾⣧⣿⠁⠙⢳⣽⡟
                    ⠈⠳⢦⣤⣤⣀⣤⡶⠛ ⠈⢿⡆  ⢿⡇
                          ⠈    ⠈⠓  ⠈
@@ -45,7 +45,7 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = '1.19';
+our $VERSION = '1.20';
 
 =head1 SYNOPSIS
 
@@ -119,6 +119,15 @@ Print data as a table:
     | blue | 222   |
     +------+-------+
 
+Encode/decode UTF-8:
+
+    perl -C -Me -e 'printf "%#X\n", ord for enc("\x{5D0}") =~ /./g'
+    0XD7
+    0X90
+
+    perl -C -Me -e 'say dec "\xD7\x90"'
+    א
+    
 =cut
 
 =head1 DESCRIPTION
@@ -219,6 +228,21 @@ XML parser.
 =head2 yml
 
 YAML parser.
+
+=head2 enc
+
+Encode to UTF-8:
+
+    perl -C -Me -e 'printf "%#X\n", ord for enc("\x{5D0}") =~ /./g'
+    0XD7
+    0X90
+    
+=head2 dec
+
+Decode from UTF-8:
+
+    perl -C -Me -e 'say dec "\xD7\x90"'
+    א
 
 =head2 b
 
@@ -401,6 +425,20 @@ sub import {
             ref $thing
               ? YAML::XS::Dump( $thing )
               : YAML::XS::Load( $thing );
+        },
+
+        # UTF-8 conversions.
+        enc => sub {
+            if ( !$imported{$caller}{"Encode"}++ ) {
+                require Encode;
+            }
+            Encode::encode( "UTF-8", @_ );
+        },
+        dec => sub {
+            if ( !$imported{$caller}{"Encode"}++ ) {
+                require Encode;
+            }
+            Encode::decode( "UTF-8", @_ );
         },
 
         ######################################
