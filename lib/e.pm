@@ -432,23 +432,17 @@ sub import {
             if ( !$imported{$caller}{"Encode"}++ ) {
                 require Encode;
             }
-            my ($ucp) = @_;
-            Encode::encode(
-                "UTF-8",
-                $ucp,
-                Encode::LEAVE_SRC,
-            );
+            my ( $ucp ) = @_;
+            Encode::encode( "UTF-8", $ucp,
+                Encode::WARN_ON_ERR() | Encode::LEAVE_SRC() );
         },
         dec => sub {
             if ( !$imported{$caller}{"Encode"}++ ) {
                 require Encode;
             }
-            my ($ubs) = @_;
-            Encode::decode(
-                "UTF-8",
-                $ubs,
-                Encode::LEAVE_SRC,
-            );
+            my ( $ubs ) = @_;
+            Encode::decode( "UTF-8", $ubs,
+                Encode::WARN_ON_ERR() | Encode::LEAVE_SRC() );
         },
 
         ######################################
