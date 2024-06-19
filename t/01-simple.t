@@ -5,6 +5,9 @@ use warnings;
 use Test::More;
 use e;
 
+binmode STDOUT, "encoding(UTF-8)";
+binmode STDERR, "encoding(UTF-8)";
+
 sub run {
     my $out = "";
 
@@ -88,6 +91,7 @@ is_deeply
   { a => 1 },
   "yml - yml string to ref";
 
+# UTF-8.
 is
   enc( "\x{5D0}" ),
   "\x{D7}\x{90}",
