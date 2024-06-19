@@ -5,8 +5,8 @@ use warnings;
 use Test::More;
 use e;
 
-binmode STDOUT, "encoding(UTF-8)";
-binmode STDERR, "encoding(UTF-8)";
+binmode *STDOUT, "encoding(UTF-8)";
+binmode *STDERR, "encoding(UTF-8)";
 
 sub run {
     my $out = "";
