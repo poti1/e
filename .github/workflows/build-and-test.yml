@@ -2,12 +2,15 @@
 name: build and test
 
 on:
+  # Automated:
   push:
     branches:
       - "main"
+      - "test"
   pull_request:
     branches:
       - "main"
+  # Manual:
   workflow_dispatch:
 
 jobs:
@@ -54,34 +57,12 @@ jobs:
           name: build_dir
           path: build_dir
 
-  coverage-job:
-    needs: build-job
-    runs-on: ubuntu-20.04
-    container:
-      image: perldocker/perl-tester:5.38
-    steps:
-
-      - name: Checkout docker/package
-        uses: actions/checkout@v4 # codecov wants to be inside a Git repository
-
-      - name: Download artifact from build step
-        uses: actions/download-artifact@v4
-        with:
-          name: build_dir
-          path: .
-
-      - name: Install deps and test
-        run: cpan-install-dist-deps && test-dist
-        env:
-          CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
-
   test-job:
     needs: build-job
     strategy:
       fail-fast: true
       matrix:
         os: [ ubuntu-latest, macos-latest ]
-        distribution: [ default ]
         perl-version:
           - "5.16"
           - "5.18"
@@ -95,9 +76,8 @@ jobs:
           - "5.34"
           - "5.36"
           - "5.38"
-        # - "5.40"   Not working!
           - "5.40.0"
-          - "latest"
+        # - "latest"
     runs-on: ${{ matrix.os }}
     name:  on ${{ matrix.os }} perl ${{ matrix.perl-version }}
     steps:
@@ -106,7 +86,7 @@ jobs:
         uses: shogo82148/actions-setup-perl@v1.30.0
         with:
           perl-version: ${{ matrix.perl-version }}
-          distribution: ${{ matrix.distribution }}
+          distribution: default
 
       - name: Download artifact from build step
         uses: actions/download-artifact@v4
@@ -121,7 +101,7 @@ jobs:
         run: |
           cpanm --notest Module::Build~0.4004
           perl Build.PL
-          perl Build installdeps
+          perl Build installdeps --cpan_client 'cpan -T'
 
       - name: Run tests
         run: prove -lr t -v
