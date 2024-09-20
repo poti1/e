@@ -1,6 +1,12 @@
 Revision history for e
 
 =================
+1.29 - 2024-09-20
+=================
+
+repl: Fixed bug with having an empty history file.
+
+=================
 1.28 - 2024-09-20
 =================
 
