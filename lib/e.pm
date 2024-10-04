@@ -396,8 +396,6 @@ Work with arrays.
 
 Turn list into a L<Mojo::Collection> object.
 
-=cut
-
 =head3 set
 
 Work with sets.
