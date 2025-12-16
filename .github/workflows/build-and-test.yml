@@ -15,9 +15,20 @@ on:
   workflow_dispatch:
 
 jobs:
+  show-available-perl-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: shogo82148/actions-setup-perl@v1
+
+      - name: List available Perl versions
+        shell: perl {0}
+        run: |
+          use Actions::Core;
+          print join("\n", perl_versions()), "\n";
+
   build-job:
     name: Build distribution
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     container:
       image: perldocker/perl-tester:5.38
     steps:
@@ -76,8 +87,8 @@ jobs:
           - "5.34"
           - "5.36"
           - "5.38"
-          - "5.40.0"
-        # - "latest"
+          - "5.40"
+          - "latest"
     runs-on: ${{ matrix.os }}
     name:  on ${{ matrix.os }} perl ${{ matrix.perl-version }}
     steps:
